@@ -3,18 +3,36 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 
+
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min; 
+  }
+
 class App extends React.Component {
+
     constructor(props) {
       super(props)
       this.state = {
         selected: 0
       }
     }
+
+     changeIndex = () => {
+        return () => {
+            this.setState({
+                selected: getRandomInt(0, anecdotes.length)
+            })
+        }
+    }
   
     render() {
       return (
         <div>
           {this.props.anecdotes[this.state.selected]}
+          <br/>
+          <button onClick = {this.changeIndex()}>Next anecdote</button>
         </div>
       )
     }
