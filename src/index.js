@@ -17,6 +17,18 @@ const getRandomInt = (min, max) => {
       })
   }
 
+  class Anecdote extends React.Component {
+      render() {
+        return (
+            <div>
+                <p>{this.props.anecdote.text}</p>
+                <p>Has {this.props.anecdote.votes} votes</p>
+            </div>
+        )
+
+      }
+  }
+
 
 class App extends React.Component {
 
@@ -51,14 +63,12 @@ class App extends React.Component {
     render() {
       return (
         <div>
-          <p>{this.props.anecdotes[this.state.selected].text}</p>
-          <p>Has {this.props.anecdotes[this.state.selected].votes} votes</p>
+          <Anecdote anecdote = {this.props.anecdotes[this.state.selected]}/>
           <button onClick = {this.addVoteToSelected}>Vote</button>
           <button onClick = {this.changeIndex()}>Next anecdote</button>
           <br/>
           <b>Anecdote with most votes:</b>
-          <p>{this.mostVotedAnecdote().text}</p>
-          <p>Has {this.mostVotedAnecdote().votes} votes</p>
+          <Anecdote anecdote = {this.mostVotedAnecdote()}/>
         </div>
       )
     }
