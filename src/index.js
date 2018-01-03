@@ -39,6 +39,14 @@ class App extends React.Component {
         this.props.anecdotes[this.state.selected].votes += 1;
         this.forceUpdate();
     }
+
+    mostVotedAnecdote = () => {
+        const copy = this.props.anecdotes.slice();
+        return copy.sort(function(a, b) {
+            return b.votes - a.votes;
+        })[0];
+
+    }
   
     render() {
       return (
@@ -47,6 +55,10 @@ class App extends React.Component {
           <p>Has {this.props.anecdotes[this.state.selected].votes} votes</p>
           <button onClick = {this.addVoteToSelected}>Vote</button>
           <button onClick = {this.changeIndex()}>Next anecdote</button>
+          <br/>
+          <b>Anecdote with most votes:</b>
+          <p>{this.mostVotedAnecdote().text}</p>
+          <p>Has {this.mostVotedAnecdote().votes} votes</p>
         </div>
       )
     }
